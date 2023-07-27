@@ -76,4 +76,4 @@ steps:
 
   - copy:
       path: '{{ license }}'
-    to: ..
+    to: ../LICENSE
