@@ -1,0 +1,79 @@
+steps:
+  - read: year
+    from: datetime.year
+
+  - read: owner
+    from: args.owner
+    fallback:
+      prompt: Who is the owner of this project?
+  
+  - read: license
+    prompt: Choose a license for your project
+    choices:
+      - MIT License: licenses/mit.txt
+      - ISC License: licenses/isc.txt
+      - The Unlicense: licenses/unlicense.txt
+      - Apache License 2.0: licenses/apache-2.0.txt
+      - GNU General Public License v3.0 (GPLv3): licenses/gpl-3.0.txt
+      - Creative Commons Zero v1.0 Universal (CC): licenses/cc0-1.0.txt
+      - DO WHAT THE FUCK YOU WANT TO (WTFPL): licenses/wtfpl.txt
+      - BSD Zero Clause License: licenses/0bsd.txt
+      - GNU Free Documentation License v1.3 (GFDL): licenses/gfdl-1.3.txt
+      - LaTeX Project Public License v1.3c (LPPL): licences/lppl-1.3c.txt
+      - SIL Open Font License 1.1 (OFL): licenses/ofl-1.1.txt
+      - Artistic License 2.0: licenses/artistic-2.0.txt
+      - CERN Open Hardware Licence Version 2 - Permissive: licenses/cern-ohl-p-2.0.txt
+      - Open Data Commons Open Database License v1.0 (ODbL): licenses/odbl-1.0.txt
+      - Educational Community License v2.0 (ECL): licenses/ecl-2.0.txt
+      - Academic Free License v3.0 (AFL): licenses/afl-3.0.txt
+      - European Union Public License 1.2 (EUPL): licenses/eupl-1.2.txt
+      - CeCILL Free Software License Agreement v2.1: licenses/cecil-2.1.txt
+      - Mulan Permissive Software License, Version 2:
+          steps:
+            - read: project_name
+              from: args.project_name
+              fallback:
+                prompt: What is the name of the project?
+                default:
+                  from: filesystem.scopedir
+          eval: license/mulanpsl-2.0.txt
+      - Mozilla Public License Version 2.0: licenses/mpl-2.0.txt
+      - VIM LICENSE: licenses/vim.txt
+      - zlib License: licenses/zlib.txt
+      - PostgreSQL License: licenses/postgresql.txt
+      - Open Software License 3.0 (OSL): licenses/osl-3.0.txt
+      - Eclipse Public License 2.0: licenses/epl-2.0.txt
+      - Eclipse Public License 1.0: licenses/epl-1.0.txt
+      - Microsoft Public License (MS-PL): licenses/ms-pl.txt
+      - Microsoft Reciprocal License (MS-RL): licenses/ms-rl.txt
+      - Boost Software License 1.0 (BSL-1.0): licenses/bsl-1.0.txt
+      - GNU Affero General Public License v3.0 (AGPL-3.0): licenses/agpl-3.0.txt
+      - GNU General Public License v2.0 (GPL-2.0): licenses/gpl-2.0.txt
+      - GNU Lesser General Public License v3.0 (LGPL-3.0): licenses/lgpl-3.0.txt
+      - GNU Lesser General Public License v2.1 (LGPL-2.1): licenses/lgpl-2.1.txt
+      - BSD 3-Clause "New" or "Revised" License: licenses/bsd-3-clause.txt
+      - BSD 2-Clause "Simplified" or "FreeBSD" License: licenses/bsd-2-clause.txt
+      - BSD 3-Clause Clear License: licenses/bsd-3-clause-clear.txt
+      - BSD 4-Clause "Original" or "Old" License: licenses/bsd-4-clause.txt
+      - Creative Commons Attribution 4.0 International (CC-BY-4.0): licenses/cc-by-4.0.txt
+      - Creative Commons Attribution Share Alike 4.0 International (CC-BY-SA-4.0): licenses/cc-by-sa-4.0.txt
+      - CERN Open Hardware Licence Version 2 - Strongly Reciprocal: licenses/cern-ohl-s-2.0.txt
+      - CERN Open Hardware Licence Version 2 - Weakly Reciprocal: licenses/cern-ohl-w-2.0.txt
+      - University of Illinois/NCSA Open Source License:
+          steps:
+            - read: project_name
+              from: args.project_name
+              fallback:
+                prompt: What is the name of the project?
+                default:
+                  from: filesystem.scopedir
+            - read: project_url
+              from: args.project_url
+              fallback:
+                prompt: What is the URL of the project?
+          eval: licenses/ncsa.txt
+      - MIT No Attribution License (MIT-0): licenses/mit-0.txt
+
+  - copy:
+      path: '{{ license }}'
+    to: ..
