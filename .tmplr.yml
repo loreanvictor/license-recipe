@@ -42,7 +42,7 @@ steps:
                 prompt: What is the name of the project?
                 default:
                   from: filesystem.scopedir
-          eval: license/mulanpsl-2.0.txt
+          eval: licenses/mulanpsl-2.0.txt
       - Mozilla Public License Version 2.0: licenses/mpl-2.0.txt
       - VIM LICENSE: licenses/vim.txt
       - zlib License: licenses/zlib.txt
