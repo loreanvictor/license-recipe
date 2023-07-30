@@ -6,6 +6,7 @@ steps:
     from: args.owner
     fallback:
       prompt: Who is the owner of this project?
+      default: '{{ git.author_name }}'
   
   - read: license
     prompt: Choose a license for your project
@@ -26,6 +27,7 @@ steps:
               from: args.email
               fallback:
                 prompt: What is your email address?
+                default: '{{ git.author_email }}'
           eval: licenses/ofl-1.1.txt
       - Artistic License 2.0: licenses/artistic-2.0.txt
       - CERN Open Hardware Licence Version 2 - Permissive: licenses/cern-ohl-p-2.0.txt
@@ -41,7 +43,8 @@ steps:
               fallback:
                 prompt: What is the name of the project?
                 default:
-                  from: filesystem.scopedir
+                  from: git.remote_name
+                  fallback: '{{ filesystem.scopedir}}'
           eval: licenses/mulanpsl-2.0.txt
       - Mozilla Public License Version 2.0: licenses/mpl-2.0.txt
       - VIM LICENSE: licenses/vim.txt
@@ -72,11 +75,18 @@ steps:
               fallback:
                 prompt: What is the name of the project?
                 default:
-                  from: filesystem.scopedir
+                  from: git.remote_name
+                  fallback: '{{ filesystem.scopedir}}'
             - read: project_url
               from: args.project_url
               fallback:
                 prompt: What is the URL of the project?
+                default:
+                  steps:
+                    - if: git.remote_provider
+                      read: suggested_project_url
+                      eval: 'https://{{ git.remote_provider }}/{{ git.remote_owner }}/{{ git.remote_name }}'
+                  eval: '{{ suggested_project_url }}'
           eval: licenses/ncsa.txt
       - MIT No Attribution License (MIT-0): licenses/mit-0.txt
 

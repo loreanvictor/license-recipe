@@ -8,7 +8,7 @@ A [tmplr](https://github.com/loreanvictor/tmplr) recipe to add license to your p
 
 ## Usage
 
-👉 Use it directly on your project:
+👉 Use it on your project:
 
 ```bash
 npx tmplr use loreanvictor/license-recipe
