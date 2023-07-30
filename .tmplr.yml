@@ -6,7 +6,8 @@ steps:
     from: args.owner
     fallback:
       prompt: Who is the owner of this project?
-      default: '{{ git.author_name }}'
+      default:
+        from: git.author_name
   
   - read: license
     prompt: Choose a license for your project
@@ -27,7 +28,8 @@ steps:
               from: args.email
               fallback:
                 prompt: What is your email address?
-                default: '{{ git.author_email }}'
+                default: 
+                  from: git.author_email
           eval: licenses/ofl-1.1.txt
       - Artistic License 2.0: licenses/artistic-2.0.txt
       - CERN Open Hardware Licence Version 2 - Permissive: licenses/cern-ohl-p-2.0.txt
@@ -44,7 +46,7 @@ steps:
                 prompt: What is the name of the project?
                 default:
                   from: git.remote_name
-                  fallback: '{{ filesystem.scopedir}}'
+                  fallback: '{{ filesystem.scopedir }}'
           eval: licenses/mulanpsl-2.0.txt
       - Mozilla Public License Version 2.0: licenses/mpl-2.0.txt
       - VIM LICENSE: licenses/vim.txt
@@ -76,7 +78,7 @@ steps:
                 prompt: What is the name of the project?
                 default:
                   from: git.remote_name
-                  fallback: '{{ filesystem.scopedir}}'
+                  fallback: '{{ filesystem.scopedir }}'
             - read: project_url
               from: args.project_url
               fallback:
@@ -86,10 +88,14 @@ steps:
                     - if: git.remote_provider
                       read: suggested_project_url
                       eval: 'https://{{ git.remote_provider }}/{{ git.remote_owner }}/{{ git.remote_name }}'
+                      else:
+                        read: suggested_project_url
+                        eval: ' '
                   eval: '{{ suggested_project_url }}'
           eval: licenses/ncsa.txt
       - MIT No Attribution License (MIT-0): licenses/mit-0.txt
 
   - copy:
       path: '{{ license }}'
-    to: ../LICENSE
+    to:
+      path: '{{ filesystem.scopedir }}/LICENSE'
