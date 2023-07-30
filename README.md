@@ -11,7 +11,7 @@ A [tmplr](https://github.com/loreanvictor/tmplr) recipe to add license to your p
 👉 Use it on your project:
 
 ```bash
-npx tmplr use loreanvictor/license-recipe
+npx tmplr use trpcs/license
 ```
 
 <br>
@@ -23,7 +23,7 @@ npx tmplr use loreanvictor/license-recipe
 steps:
   # ...
 
-  - use: loreanvictor/license-recipe
+  - use: trpcs/license
 
   # ...
 ```
