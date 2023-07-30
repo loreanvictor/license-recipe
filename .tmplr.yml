@@ -98,4 +98,4 @@ steps:
   - copy:
       path: '{{ license }}'
     to:
-      path: '{{ filesystem.scopedir }}/LICENSE'
+      path: '{{ filesystem.scope }}/LICENSE'
